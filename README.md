@@ -1,16 +1,47 @@
-# Executive Fraud Risk & Loss Mitigation Dashboard
+# 🛡️ Executive Fraud Risk & Loss Mitigation Dashboard
 
-![Dashboard Preview](assets/dashboard_preview.png)
+![Fraud Exposure](https://img.shields.io/badge/Total_Fraud_Loss-$1.13M-red?style=for-the-badge)
+![Fraud Rate](https://img.shields.io/badge/Fraud_Loss_Rate-2.94%25-orange?style=for-the-badge)
+![Tech Stack](https://img.shields.io/badge/Stack-SQL_%7C_Python_%7C_Power_BI-blue?style=for-the-badge)
+
+An end-to-end data analytics pipeline and interactive Power BI dashboard designed to identify high-risk financial transaction channels, quantify loss exposure, and formulate targeted mitigation strategies.
+
+---
+
+## 📑 Executive Assets
+
+* 📄 **[View Executive Presentation Deck (PDF)](assets/Executive_Fraud_Mitigation_Deck.pdf)**
+* 📊 **[Executive Dashboard Screenshot](assets/dashboard_preview.png)**
+* 🔄 **[End-to-End Pipeline Workflow](assets/pipeline_workflow.png)**
+
+---
+
+## 📹 Interactive Dashboard Walkthrough
+
+<video src="assets/dashboard_demo.mp4" controls width="100%" poster="assets/dashboard_preview.png">
+  Your browser does not support the video tag. <a href="assets/dashboard_demo.mp4">Click here to watch the demo video directly.</a>
+</video>
+
+> *Note: If the video player does not load automatically in your web browser, you can inspect the full MP4 recording inside the [`assets/`](assets/) directory.*
+
+---
 
 ## 📌 Business Overview
-This end-to-end data project analyzes **$1.13M in financial transaction fraud** across online (`_net`) and physical (`_pos`) channels. The interactive Power BI dashboard identifies high-risk exposure windows, key transaction categories, and operational mitigation strategies to minimize annual fraud loss.
+
+This project analyzes **$1.13M in financial transaction fraud** across online (`_net`) and physical (`_pos`) channels. By integrating raw transaction logs through SQL and Python into a Star Schema Power BI model, the executive dashboard exposes channel-specific vulnerabilities and provides actionable rules to prevent annual fraud losses.
+
+### Key Takeaways:
+* **Primary Exposure:** Online (`_net`) transactions account for **63.4% ($718.35K)** of overall fraud loss.
+* **Peak Window:** Fraud volume surges heavily during late-night hours (**10:00 PM – 3:00 AM**).
+* **Financial Impact:** Implementing target risk controls on top-tier overnight spikes projects **~$180K in annual loss prevention**.
 
 ---
 
 ## 🛠️ Tech Stack & Workflow
-* **SQL:** Data extraction, aggregation, and initial data transformation.
-* **Python:** Automated cleaning pipeline and feature engineering.
-* **Power BI:** Data modeling, DAX measures, dark-mode UX design, and interactive filtering.
+
+* **Data Extraction & Transformation:** `SQL` (Filtering, aggregate grouping, and cleaning logic)
+* **Automated Data Pipeline:** `Python` (`pandas` / automated feature engineering & preprocessing)
+* **Data Modeling & BI:** `Power BI` (Star Schema, DAX calculation table, custom dark-mode executive UX)
 
 ---
 
@@ -20,41 +51,18 @@ This end-to-end data project analyzes **$1.13M in financial transaction fraud** 
 
 ---
 
-## 📊 Core Business Insights
+## 📂 Repository Structure
 
-### 1. Risk Exposure
-* **Channel Split:** Online transactions account for **63.4% ($718.35K)** of total fraud losses, compared to **36.6% ($414.98K)** in-person.
-* **Primary Drivers:** `Shopping (Net)` generates **~$0.50M** in loss, followed by `Misc (Net)` at **$0.21M**.
-* **Temporal Patterns:** Peak fraud volume occurs during the late-night window (**10 PM – 3 AM**), showing a sharp velocity drop-off after 4 AM.
-
-### 2. Loss Mitigation Strategy
-* **Rule 1 (MFA/3DS Step-Up):** Mandate dynamic multi-factor authentication on online transactions exceeding **$500** during late-night hours (**10 PM – 4 AM**).
-* **Rule 2 (Velocity Capping):** Implement dynamic transaction limits on `Shopping (Net)` to cap automated card-testing scripts.
-* **Financial Impact:** Targeted intervention on the top 20% overnight spikes projects an estimated **~$180K in annual loss prevention**.
-
----
-
-## 📐 Key DAX Measures (`_Risk KPIs` Table)
-
-```dax
-// Total Fraud Loss
-Total Fraud Loss = SUM(cleaned_financial_risk_data[amount])
-
-// Online Fraud Loss
-Online Fraud Loss = 
-CALCULATE(
-    [Total Fraud Loss], 
-    cleaned_financial_risk_data[Channel] = "Online"
-)
-
-// In-Person Fraud Loss
-In-Person Fraud Loss = 
-CALCULATE(
-    [Total Fraud Loss], 
-    cleaned_financial_risk_data[Channel] = "In-Person"
-)
-
-// Fraud Loss Rate %
-Fraud Loss Rate % = 
-DIVIDE([Total Fraud Loss], SUM(cleaned_financial_risk_data[total_amount]), 0)
-```
+```text
+├── assets/
+│   ├── dashboard_preview.png         # High-resolution dashboard screenshot
+│   ├── dashboard_demo.mp4            # Interactive screen recording walkthrough
+│   ├── pipeline_workflow.png         # E2E pipeline architectural diagram
+│   └── Executive_Fraud_Mitigation_Deck.pdf  # 5-Slide presentation deck
+├── python/
+│   └── financial_risk.py              # Automated data cleaning & transformation script
+├── sql/
+│   └── financial_risk_sql_queries.sql             # Data manipulation and queries
+├── power_bi/
+│   └── financial_risk_analysis_dashboard.pbix # Interactive Power BI report file
+└── README.md                         # Project documentation
