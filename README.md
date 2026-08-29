@@ -18,9 +18,7 @@ An end-to-end data analytics pipeline and interactive Power BI dashboard designe
 
 ## 📹 Interactive Dashboard Walkthrough
 
-<video src="assets/dashboard_demo.mp4" controls width="100%" poster="assets/dashboard_preview.png">
-  Your browser does not support the video tag. <a href="assets/dashboard_demo.mp4">Click here to watch the demo video directly.</a>
-</video>
+![Dashboard Walkthrough](assets/dashboard_demo.gif)
 
 > *Note: If the video player does not load automatically in your web browser, you can inspect the full MP4 recording inside the [`assets/`](assets/) directory.*
 
